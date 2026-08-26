@@ -76,6 +76,35 @@ echo "\n Fim da contagem.";
     echo"os numeros são iguais\n";
   }
   echo "o numero ",$maior, " é o maior";
+
+  #questão 7
+
+  $i2 = 20;
+ 
+  while($i2 >= 0){
+    
+
+    if(($i2 % 5) == 0){
+      echo "\n", $i2, " Múltiplo de 5\n";
+    }else{
+      echo "\n",$i2;
+    }
+    $i2--;
+  }
+
+  echo "\n Contagem encerrada!";
+
+
+  #questão 8
+
   
+  $numero5 = 4;
+  for($i = $numero5 - 1; $i >= 1; $i--){
+
+    $numero5 = $numero5 * $i;
+    echo "\n", $numero5;
+
+
+  }
 
 ?>
