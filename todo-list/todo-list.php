@@ -15,11 +15,32 @@
 
 # criacao de tarefas
 
+
+        if(isset($_POST['descricao']) && !empty(trim($_POST['descricao']))){
+            $descricao = $conn -> real_escape_string($_POST['descricao']);
+            $sqlCreate = "INSERT INTO tarefas (descricao) VALUES ('$descricao')";
+
+            if($conn -> query($sqlCreate) == TRUE){
+                header("localhost: todo-list.php");
+            }
+        }
+        
+
 # Exclusão de tarefas
 
 
 $tarefas=[]; 
 # Listar tarefas
+
+            $sqlSelect = "SELECT * FROM tarefas ORDER BY data_criacao DESC";
+
+            $resultados = $conn -> query($sqlSelect);
+
+            if($resultados -> num_rows > 0){
+                while($row = $resultados -> fetch_assoc()){
+                    $tarefas[] = $row;
+                }
+            }
 
 
 ?>
@@ -34,7 +55,7 @@ $tarefas=[];
 <body>
 
     <h1>TO-DO List</h1>
-    <form action="todo-list2.php" method="POST">
+    <form action="todo-list.php" method="POST">
         <input type="text" placeholder="Descrição da sua tarefa" name="descricao"/>
         <button type="submit">Adicionar</button> 
     </form>
@@ -44,6 +65,14 @@ $tarefas=[];
     <h2>Suas tarefas</h2>
 
     <ul>
+        <?php 
+            foreach($tarefas as $tarefas);
+        ?>
+        <li>
+        <?php 
+            echo $tarefas['descricao'];
+        ?>
+        </li>
         <li>tenho uma tarefa</li>
     </ul>
 
