@@ -27,7 +27,20 @@ class tarefaController{
         }
         header("Location: index.php"); 
     }
+
+    #editar
+
+    public function editar(){
+        if(isset($_POST['id']) && isset($_POST['descricao']) && !empty(trim($_POST['descricao']))){
+            $this->tarefaModel->editar($_POST['descricao'], $_POST['id']);
+
+            
+        }
+
+        header("Location: index.php");
+        
     
+    }
 }
 
 

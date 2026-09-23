@@ -1,9 +1,34 @@
+listar.php
+100%
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>To-Do List (MVC)</title>
     <style>
+        .modal {
+            display: none;
+
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-conteudo {
+            background-color: white;
+
+            width: 300px;
+
+            margin: 150px auto;
+            padding: 20px;
+
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -20,13 +45,35 @@
         <ul>
             <?php foreach ($tarefas as $tarefa): ?>
                 <li>
-                    <?php echo htmlspecialchars($tarefa['descricao']); ?>
-                    <a href="index.php?action=excluir&id=<?php echo $tarefa['id']; ?>">Excluir</a>
+                    <?php echo ($tarefa['descricao']); ?>
+                    <a href="index.php?action=excluir&id=<?php echo $tarefa['id']; ?>">
+                        Excluir
+                    </a>
+                    <button
+                        onclick="abrirModal(<?php echo $tarefa['id']; ?>,
+                            '<?php echo ($tarefa['descricao']); ?>')">
+                        Editar
+                    </button>
             <?php endforeach; ?>
         </ul>
     <?php else: ?>
         <p>Não há tarefas ainda!</p>
     <?php endif; ?>
+
+    <?php include __DIR__ . '\modalEditar.php'; ?>
+
+
+    <script>
+        function abrirModal(id, descricao){
+         document.getElementById("editarId").value = id;
+         document.getElementById("editarDescricao").value = descricao;
+         document.getElementById("modalEditar").style.display = "block";    
+        }
+
+        function fecharModal(){
+            document.getElementById("modalEditar").style.display = "none";
+        }
+    </script>
 
 </body>
 </html>
