@@ -54,20 +54,21 @@ listar.php
                             '<?php echo ($tarefa['descricao']); ?>')">
                         Editar
                     </button>
+                </li>
             <?php endforeach; ?>
         </ul>
     <?php else: ?>
         <p>Não há tarefas ainda!</p>
     <?php endif; ?>
 
-    <?php include __DIR__ . '\modalEditar.php'; ?>
+    <?php include __DIR__ . '/modalEditar.php'; ?>
 
 
     <script>
         function abrirModal(id, descricao){
          document.getElementById("editarId").value = id;
          document.getElementById("editarDescricao").value = descricao;
-         document.getElementById("modalEditar").style.display = "block";    
+         document.getElementById("modalEditar").style.display = "block";
         }
 
         function fecharModal(){

@@ -33,7 +33,7 @@ class UsuarioController{
             exit;
         }
         
-        $usuario = $this->UsuarioModel->buscarPoremail($email);
+        $usuario = $this->UsuarioModel->buscarPorEmail($email);
 
         if($usuario && password_verify($senha, $usuario['senha'])){
 
