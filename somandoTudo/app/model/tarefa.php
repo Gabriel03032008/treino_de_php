@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../config/database.php';
 
 class Tarefa{
-    private $conn; 
+    private $conn;
 
     public function __construct(){
         $db = new Database();
@@ -43,13 +43,13 @@ class Tarefa{
     return $this->conn->query($sql);
     }
 
-    #Excluir 
+    #Excluir
 
     public function excluir($id, $id_usuario){
     $id = intval($id);
     $id_usuario = intval($id_usuario);
 
-    $sql = "DELETE FROM tarefas 
+    $sql = "DELETE FROM tarefas
             WHERE id = $id AND id_usuario = $id_usuario";
 
     return $this->conn->query($sql);
@@ -63,7 +63,7 @@ class Tarefa{
         $id_usuario = intval($id_usuario);
 
         $sql = "UPDATE tarefas 
-                SET descricao = '$descricao' 
+                SET descricao = '$descricao'
                 WHERE id = $id AND id_usuario = $id_usuario";
 
         return $this->conn->query($sql);

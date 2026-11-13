@@ -11,8 +11,8 @@ class Usuario{
     }
 
     public function buscarPorEmail($email){
-        $tarefas = []; 
-        $sql = "SELECT * FROM usuarios WHERE email = ?"; 
+        $tarefas = [];
+        $sql = "SELECT * FROM usuarios WHERE email = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("s", $email);
         $stmt->execute();

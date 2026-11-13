@@ -1,47 +1,72 @@
-<?php 
+
+<?php
 
 require_once __DIR__ . '/../model/tarefa.php';
 
-class tarefaController{
-    private $tarefaModel; 
-
-    public function __construct(){
-        $this->tarefaModel = new Tarefa(); 
-    }
-
-    public function index(){
-        $tarefas = $this->tarefaModel->listar(); 
-        include __DIR__ . '/../view/listar.php'; 
-    }
-
-    public function criar(){
-        if(isset($_POST['descricao']) && !empty(trim($_POST['descricao']))){
-            $this->tarefaModel->criar($_POST['descricao']);
-        }
-        header("Location: index.php");
-    }
-
-    public function excluir(){
-        if(isset($_GET['id'])){
-            $this->tarefaModel->excluir($_GET['id']);
-        }
-        header("Location: index.php"); 
-    }
-
-    #editar
-
-    public function editar(){
-        if(isset($_POST['id']) && isset($_POST['descricao']) && !empty(trim($_POST['descricao']))){
-            $this->tarefaModel->editar($_POST['descricao'], $_POST['id']);
-
-            
-        }
-
-        header("Location: index.php");
-        
-    
-    }
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
+class tarefaController {
+
+    private $tarefaModel;
+
+    public function __construct() {
+        $this->tarefaModel = new Tarefa();
+    }
+
+    // Listar tarefas
+    public function index() {
+
+        $id_usuario = $_SESSION['id'];
+        $tarefas = $this->tarefaModel->listar($id_usuario);
+
+        include __DIR__ . '/../view/listar.php';
+    }
+
+    // Criar tarefa
+    public function criar() {
+
+        if (isset($_POST['descricao']) && !empty(trim($_POST['descricao']))) {
+
+            $id_usuario = $_SESSION['id'];
+            $this->tarefaModel->criar($_POST['descricao'],$id_usuario);
+        }
+
+        header("Location: index.php");
+        exit;
+    }
+
+    // Excluir tarefa
+    public function excluir() {
+
+        if (isset($_GET['id'])) {
+
+            $id = $_GET['id'];
+            $id_usuario = $_SESSION['id'];
+
+            $this->tarefaModel->excluir($id, $id_usuario);
+        }
+
+        header("Location: index.php");
+        exit;
+    }
+
+    // Editar tarefa
+    public function editar() {
+
+        if (isset($_POST['id']) && isset($_POST['descricao']) && !empty(trim($_POST['descricao']))){
+
+            $id = $_POST['id'];
+            $descricao = $_POST['descricao'];
+            $id_usuario = $_SESSION['id'];
+
+            $this->tarefaModel->editar($descricao, $id,$id_usuario);
+        }
+
+        header("Location: index.php");
+        exit;
+    }
+}
 
 ?>

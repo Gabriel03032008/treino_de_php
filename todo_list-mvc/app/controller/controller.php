@@ -10,7 +10,7 @@ class tarefaController{
     }
 
     public function index(){
-        $tarefa = $this->tarefaModel->listar(); 
+        $tarefas = $this->tarefaModel->listar(); 
         include __DIR__ . '/../view/listar.php'; 
     }
 
