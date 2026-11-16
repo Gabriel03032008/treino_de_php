@@ -66,9 +66,9 @@ listar.php
 
     <script>
         function abrirModal(id, descricao){
-         document.getElementById("editarId").value = id;
-         document.getElementById("editarDescricao").value = descricao;
-         document.getElementById("modalEditar").style.display = "block";
+            document.getElementById("editarId").value = id;
+            document.getElementById("editarDescricao").value = descricao;
+            document.getElementById("modalEditar").style.display = "block";
         }
 
         function fecharModal(){
