@@ -36,7 +36,7 @@ class tarefaController {
             $this->tarefaModel->criar($_POST['descricao'], $id_usuario);
         }
 
-        header("Location: index.php?action=painel");
+        header("Location: index.php?action=tarefas");
         exit;
     }
 
@@ -54,7 +54,7 @@ class tarefaController {
             $this->tarefaModel->excluir($id, $id_usuario);
         }
 
-        header("Location: index.php?action=painel");
+        header("Location: index.php?action=tarefas");
         exit;
     }
 
@@ -74,7 +74,7 @@ class tarefaController {
             $this->tarefaModel->editar($descricao, $id, $id_usuario);
         }
 
-        header("Location: index.php?action=painel");
+        header("Location: index.php?action=tarefas");
         exit;
     }
 }

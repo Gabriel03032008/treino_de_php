@@ -1,17 +1,17 @@
-<?php 
+
+<?php
 
 require_once __DIR__ . '/../config/database.php';
 
-class Usuario{
-    private $conn; 
+class Usuario {
+    private $conn;
 
-    public function __construct(){
+    public function __construct() {
         $db = new Database();
         $this->conn = $db->conectar();
     }
 
-    public function buscarPorEmail($email){
-        $tarefas = [];
+    public function buscarPorEmail($email) {
         $sql = "SELECT * FROM usuarios WHERE email = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("s", $email);
@@ -19,7 +19,6 @@ class Usuario{
 
         $resultado = $stmt->get_result();
         return $resultado->fetch_assoc();
-
     }
 }
 
