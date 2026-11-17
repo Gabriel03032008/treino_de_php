@@ -6,7 +6,7 @@ class UsuarioController{
     private $UsuarioModel; 
 
     public function __construct(){
-        $this->UsuarioModel = new Usuario(); 
+        $this->UsuarioModel = new Usuario();
     }
 
     public function index(){

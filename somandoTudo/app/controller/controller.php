@@ -3,10 +3,6 @@
 
 require_once __DIR__ . '/../model/tarefa.php';
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
 class tarefaController {
 
     private $tarefaModel;
@@ -15,8 +11,12 @@ class tarefaController {
         $this->tarefaModel = new Tarefa();
     }
 
-    // Listar tarefas
     public function index() {
+
+        if (!isset($_SESSION['id'])) {
+            header("Location: index.php");
+            exit;
+        }
 
         $id_usuario = $_SESSION['id'];
         $tarefas = $this->tarefaModel->listar($id_usuario);
@@ -24,49 +24,58 @@ class tarefaController {
         include __DIR__ . '/../view/listar.php';
     }
 
-    // Criar tarefa
     public function criar() {
 
-        if (isset($_POST['descricao']) && !empty(trim($_POST['descricao']))) {
-
-            $id_usuario = $_SESSION['id'];
-            $this->tarefaModel->criar($_POST['descricao'],$id_usuario);
+        if (!isset($_SESSION['id'])) {
+            header("Location: index.php");
+            exit;
         }
 
-        header("Location: index.php");
+        if (isset($_POST['descricao']) && !empty(trim($_POST['descricao']))) {
+            $id_usuario = $_SESSION['id'];
+            $this->tarefaModel->criar($_POST['descricao'], $id_usuario);
+        }
+
+        header("Location: index.php?action=painel");
         exit;
     }
 
-    // Excluir tarefa
     public function excluir() {
 
-        if (isset($_GET['id'])) {
+        if (!isset($_SESSION['id'])) {
+            header("Location: index.php");
+            exit;
+        }
 
+        if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $id_usuario = $_SESSION['id'];
 
             $this->tarefaModel->excluir($id, $id_usuario);
         }
 
-        header("Location: index.php");
+        header("Location: index.php?action=painel");
         exit;
     }
 
-    // Editar tarefa
     public function editar() {
 
-        if (isset($_POST['id']) && isset($_POST['descricao']) && !empty(trim($_POST['descricao']))){
+        if (!isset($_SESSION['id'])) {
+            header("Location: index.php");
+            exit;
+        }
+
+        if (isset($_POST['id']) && isset($_POST['descricao']) && !empty(trim($_POST['descricao']))) {
 
             $id = $_POST['id'];
             $descricao = $_POST['descricao'];
             $id_usuario = $_SESSION['id'];
 
-            $this->tarefaModel->editar($descricao, $id,$id_usuario);
+            $this->tarefaModel->editar($descricao, $id, $id_usuario);
         }
 
-        header("Location: index.php");
+        header("Location: index.php?action=painel");
         exit;
     }
 }
-
 ?>

@@ -51,7 +51,7 @@ listar.php
                     </a>
                     <button
                         onclick="abrirModal(<?php echo $tarefa['id']; ?>,
-                            '<?php echo ($tarefa['descricao']); ?>')">
+                        <?php echo json_encode($tarefa['descricao']); ?>)">
                         Editar
                     </button>
                 </li>

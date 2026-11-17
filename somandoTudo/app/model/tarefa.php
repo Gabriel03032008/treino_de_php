@@ -16,8 +16,8 @@ class Tarefa{
     $id_usuario = intval($id_usuario);
     $tarefas = [];
 
-    $sql = "SELECT * FROM tarefas 
-            WHERE id_usuario = $id_usuario 
+    $sql = "SELECT * FROM tarefas
+            WHERE id_usuario = $id_usuario
             ORDER BY data_criacao DESC";
 
     $resultado = $this->conn->query($sql);
