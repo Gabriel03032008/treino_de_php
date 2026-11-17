@@ -24,8 +24,9 @@
             break;
         case 'editar':
             $controller->editar();
+            break;
         default:
-            $controller->index();
+            $usuarioController->index();
             break;
     }
 ?>
